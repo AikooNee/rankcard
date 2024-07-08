@@ -1,8 +1,7 @@
-const path = require('path');
-const canvas = require("@napi-rs/canvas");
 const { registerFont } = require("../functions/registerFont");
-const { loadImage } = require("@napi-rs/canvas");
 const { colorFetch } = require("../functions/colorFetch");
+const { canvas, loadImage } = require("@napi-rs/canvas");
+const path = require('path');
 
 registerFont("circularstd-black.otf", "circular-std");
 registerFont("notosans-jp-black.ttf", "noto-sans-jp");
