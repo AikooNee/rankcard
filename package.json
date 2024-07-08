@@ -1,0 +1,43 @@
+{
+  "name": "rankcard",
+  "version": "1.1.7",
+  "description": "transform your rank cards into works of art with rankcard",
+  "main": "build/index.js",
+  "files": [
+    "build",
+    "res"
+  ],
+  "keywords": [
+    "rank-card",
+    "discord-rank-card",
+    "rank-card-discord",
+    "discord.js",
+    "node-canvas",
+    "canvas-constructor",
+    "discord",
+    "discord-canvas",
+    "discord-canvas-rank-card",
+    "discord-canvas-rank",
+    "rankcard",
+    "discord-rankcard",
+    "discord-rank-card",
+    "discord.js-rankcard",
+    "discord.js-rank-card",
+    "level",
+    "level-card",
+    "level-card-discord"
+  ],
+  "author": "Twinkle069",
+  "license": "MIT",
+  "dependencies": {
+    "@napi-rs/canvas": "^0.1.51",
+    "rc-color": "^1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AikooNee"
+  },
+  "bugs": {
+    "url": "https://github.com/AikooNee"
+  }
+}
