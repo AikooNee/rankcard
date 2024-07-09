@@ -1,11 +1,11 @@
 {
   "name": "rankcard",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "description": "Make your rank cards stand out with rankcard",
-  "main": "build/index.js",
+  "main": "lib/index.js",
   "files": [
-    "build",
-    "res"
+    "lib",
+    "assets"
   ],
   "keywords": [
     "rank-card",
@@ -52,7 +52,7 @@
   "author": "AikooNee",
   "license": "MIT",
   "dependencies": {
-    "@napi-rs/canvas": "^0.1.51",
+    "@napi-rs/canvas": "^0.1.53",
     "rc-color": "^1.0.0"
   },
   "repository": {
