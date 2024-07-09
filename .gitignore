@@ -2,3 +2,5 @@
 node_modules
 # no package-lock.json
 package-lock.json
+# no .replit
+.replit
