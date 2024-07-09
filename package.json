@@ -7,6 +7,19 @@
     "lib",
     "assets"
   ],
+  "author": "AikooNee",
+  "license": "MIT",
+  "dependencies": {
+    "@napi-rs/canvas": "^0.1.53",
+    "rc-color": "^1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AikooNee/rankcard/tree/main"
+  },
+  "bugs": {
+    "url": "https://github.com/AikooNee/rankcard/issues"
+  },
   "keywords": [
     "rank-card",
     "discord-rank-card",
@@ -48,18 +61,5 @@
     "status-card",
     "user-card",
     "discord-user"
-  ],
-  "author": "AikooNee",
-  "license": "MIT",
-  "dependencies": {
-    "@napi-rs/canvas": "^0.1.53",
-    "rc-color": "^1.0.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/AikooNee/rankcard/tree/main"
-  },
-  "bugs": {
-    "url": "https://github.com/AikooNee/rankcard/issues"
-  }
+  ]
 }
