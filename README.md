@@ -35,7 +35,7 @@ const rankcard = RankCard({
 const { AttachmentBuilder } = require("discord.js");
 const { RankCard } = require("rankcard");
 
-const card = await RankCard({
+const rankcard = await RankCard({
     name: "AikooNee",
     level: "Level 7",
     color: "auto",
@@ -49,7 +49,7 @@ const card = await RankCard({
     shape: "square" // circle
 });
 
-const attachment = new AttachmentBuilder(card, { name: "rankcard.png" });
+const attachment = new AttachmentBuilder(rankcard, { name: "rankcard.png" });
 ```
 
 Preview:
