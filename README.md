@@ -6,7 +6,7 @@ Make your rank cards stand out with rankcard!
 npm install rankcard
 ```
 
-## Example
+## First Example
 
 ```js
 const { RankCard } = require("rankcard");
@@ -17,19 +17,19 @@ const rankcard = RankCard({
     level: "Level 7",
     color: "auto",
     brightness: "50", // 0 to 100
-    avatar: "https://imgur.com/D3fPXyK.png",
+    avatar: "https://imgur.com/L09Pk3D.png",
     progress: "33",
     rank: "1",
     requiredXp: "4900",
     currentXp: "1600",
     showXp: true,
-    shape: "square" // circle
+    shape: "circle" // square
 }).then(b => {
     fs.writeFileSync("rankcard.png", b);
 });
 ```
 
-## Advanced Usage
+## Second Example
 
 ```js
 const { AttachmentBuilder } = require("discord.js");
@@ -40,13 +40,13 @@ const rankcard = await RankCard({
     level: "Level 7",
     color: "auto",
     brightness: "50", // 0 to 100
-    avatar: "https://imgur.com/D3fPXyK.png",
+    avatar: "https://imgur.com/L09Pk3D.png",
     progress: "33",
     rank: "1",
     requiredXp: "4900",
     currentXp: "1600",
     showXp: true,
-    shape: "square" // circle
+    shape: "circle" // square
 });
 
 const attachment = new AttachmentBuilder(rankcard, { name: "rankcard.png" });
@@ -54,4 +54,4 @@ const attachment = new AttachmentBuilder(rankcard, { name: "rankcard.png" });
 
 Preview:
 
-![RankCard](https://imgur.com/xcAZzj2.png)
+![RankCard](https://imgur.com/L09Pk3D.png)
