@@ -16,16 +16,18 @@ const rankcard = RankCard({
     name: "AikooNee",
     level: "Level 7",
     color: "auto",
+    shape: "circle" // square
+    // Optional status: "dnd", // online, offline, dnd, idle, streaming
     brightness: "50", // 0 to 100
-    avatar: "https://imgur.com/L09Pk3D.png",
+    avatar: "https://imgur.com/wFNKzLc.png",
     progress: "33",
     rank: "1",
     requiredXp: "4900",
     currentXp: "1600",
-    showXp: true,
-    shape: "circle" // square
+    showXp: true
 }).then(b => {
     fs.writeFileSync("rankcard.png", b);
+console.log("Done!")
 });
 ```
 
@@ -39,14 +41,15 @@ const rankcard = await RankCard({
     name: "AikooNee",
     level: "Level 7",
     color: "auto",
+    shape: "circle" // square
+    // Optional status: "dnd", // online, offline, dnd, idle, streaming
     brightness: "50", // 0 to 100
-    avatar: "https://imgur.com/L09Pk3D.png",
+    avatar: "https://imgur.com/wFNKzLc.png",
     progress: "33",
     rank: "1",
     requiredXp: "4900",
     currentXp: "1600",
-    showXp: true,
-    shape: "circle" // square
+    showXp: true
 });
 
 const attachment = new AttachmentBuilder(rankcard, { name: "rankcard.png" });
@@ -54,4 +57,4 @@ const attachment = new AttachmentBuilder(rankcard, { name: "rankcard.png" });
 
 Preview:
 
-![RankCard](https://imgur.com/L09Pk3D.png)
+![RankCard](https://imgur.com/wFNKzLc.png)
