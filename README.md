@@ -19,7 +19,7 @@ const rankcard = RankCard({
     shape: "circle", // square
     // Optional status: "dnd", // online, dnd, offline, idle, streaming
     brightness: "50", // 0 to 100
-    avatar: "https://imgur.com/wFNKzLc.png",
+    avatar: "https://imgur.com/L09Pk3D.png",
     progress: "33",
     rank: "1",
     requiredXp: "4900",
@@ -44,7 +44,7 @@ const rankcard = await RankCard({
     shape: "circle", // square
     // Optional status: "dnd", // online, dnd, offline, idle, streaming
     brightness: "50", // 0 to 100
-    avatar: "https://imgur.com/wFNKzLc.png",
+    avatar: "https://imgur.com/L09Pk3D.png",
     progress: "33",
     rank: "1",
     requiredXp: "4900",

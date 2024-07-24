@@ -1,6 +1,6 @@
 {
   "name": "rankcard",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Make your rank cards stand out with rankcard",
   "main": "lib/index.js",
   "files": [
