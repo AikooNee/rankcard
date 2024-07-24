@@ -16,8 +16,8 @@ const rankcard = RankCard({
     name: "AikooNee",
     level: "Level 7",
     color: "auto",
-    shape: "circle" // square
-    // Optional status: "dnd", // online, offline, dnd, idle, streaming
+    shape: "circle", // square
+    // Optional status: "dnd", // online, dnd, offline, idle, streaming
     brightness: "50", // 0 to 100
     avatar: "https://imgur.com/wFNKzLc.png",
     progress: "33",
@@ -41,8 +41,8 @@ const rankcard = await RankCard({
     name: "AikooNee",
     level: "Level 7",
     color: "auto",
-    shape: "circle" // square
-    // Optional status: "dnd", // online, offline, dnd, idle, streaming
+    shape: "circle", // square
+    // Optional status: "dnd", // online, dnd, offline, idle, streaming
     brightness: "50", // 0 to 100
     avatar: "https://imgur.com/wFNKzLc.png",
     progress: "33",
