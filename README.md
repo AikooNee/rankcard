@@ -15,7 +15,7 @@ const fs = require("fs");
 const rankcard = RankCard({
     name: "AikooNee",
     level: "Level 7",
-    color: "auto",
+    color: "#FFC0CB", // auto
     shape: "circle", // square
     // Optional status: "dnd", // online, dnd, offline, idle, streaming
     brightness: "50", // 0 to 100
@@ -40,7 +40,7 @@ const { RankCard } = require("rankcard");
 const rankcard = await RankCard({
     name: "AikooNee",
     level: "Level 7",
-    color: "auto",
+    color: "#FFC0CB", // auto
     shape: "circle", // square
     // Optional status: "dnd", // online, dnd, offline, idle, streaming
     brightness: "50", // 0 to 100
