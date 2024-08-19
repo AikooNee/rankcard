@@ -6,7 +6,7 @@ Make your rank cards stand out with rankcard!
 npm install rankcard
 ```
 
-## First Example
+## Example Code
 
 ```js
 const { RankCard } = require("rankcard");
@@ -31,7 +31,7 @@ console.log("Done!")
 });
 ```
 
-## Second Example
+## Using In Discord Bot
 
 ```js
 const { AttachmentBuilder } = require("discord.js");
