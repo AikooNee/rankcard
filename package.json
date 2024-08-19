@@ -1,8 +1,11 @@
 {
   "name": "rankcard",
-  "version": "1.2.4",
+  "version": "1.2.8",
   "description": "Make your rank cards stand out with rankcard",
   "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "exports": {
@@ -15,9 +18,7 @@
   "scripts": {
     "build": "npm run build:ts",
     "build:ts": "tsup --config tsup-config.json",
-    "postbuild": "cp -r ./assets ./dist/assets",
-    "lint": "eslint .",
-    "prepare": "npm run build:ts"
+    "postbuild": "cp -r ./assets ./dist/assets"
   },
   "author": "AikooNee",
   "license": "MIT",
