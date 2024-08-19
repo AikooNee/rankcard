@@ -1,17 +1,34 @@
 {
   "name": "rankcard",
-  "version": "1.2.3",
+  "version": "1.2.5",
   "description": "Make your rank cards stand out with rankcard",
-  "main": "lib/index.js",
-  "files": [
-    "lib",
-    "assets"
-  ],
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "npm run build:ts",
+    "build:ts": "tsup --config tsup-config.json",
+    "postbuild": "cp -r ./assets ./dist/assets",
+    "lint": "eslint .",
+    "prepare": "npm run build:ts"
+  },
   "author": "AikooNee",
   "license": "MIT",
   "dependencies": {
     "@napi-rs/canvas": "^0.1.53",
     "rc-color": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.2.0",
+    "tsup": "^8.2.4",
+    "typescript": "^5.5.4"
   },
   "repository": {
     "type": "git",

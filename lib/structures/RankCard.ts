@@ -1,8 +1,8 @@
-const { registerFont } = require("../functions/registerFont");
-const { colorFetch } = require("../functions/colorFetch");
-const { loadImage } = require("@napi-rs/canvas");
-const canvas = require("@napi-rs/canvas");
-const path = require("path");
+import { createCanvas, loadImage } from "@napi-rs/canvas";
+import { registerFont } from "../functions/registerFont";
+import type { RankCardOption } from "../typings/types";
+import { colorFetch } from "../functions/colorFetch";
+import path from "path";
 
 registerFont("circularstd-black.otf", "circular-std");
 registerFont("notosans-jp-black.ttf", "noto-sans-jp");
@@ -11,25 +11,26 @@ registerFont("notoemoji-bold.ttf", "noto-emoji");
 registerFont("notosans-kr-black.ttf", "noto-sans-kr");
 registerFont("Chewy-Regular.ttf", "chewy");
 
-const RankCard = async (options) => {
-    if (!options.name) options.name = "AikooNee";
-    if (!options.level) options.level = "3";
-    if (!options.color) options.color = "auto";
-    if (!options.shape) options.shape = "circle";
-    if (!options.status) options.status = "online";
-    if (!options.brightness) options.brightness = "50";
-    if (!options.avatar) options.avatar = "https://imgur.com/uNeB2S6.png";
-    if (!options.progress) options.progress = "50";
-    if (!options.rank) options.rank = "3";
-    if (!options.requiredXp) options.requiredXp = "6900";
-    if (!options.currentXp) options.currentXp = "3000";
-    if (options.showXp === undefined) options.showXp = true;
+const RankCard = async (options: RankCardOption): Promise<Buffer> => {
+    options.name = options.name ?? "AikooNee";
+    options.level = options.level ?? "3";
+    options.color = options.color ?? "auto";
+    options.shape = options.shape ?? "circle";
+    options.status = options.status ?? "online";
+    options.brightness = options.brightness ?? "50";
+    options.avatar = options.avatar ?? "https://imgur.com/uNeB2S6.png";
+    options.progress = options.progress ?? "50";
+    options.rank = options.rank ?? "3";
+    options.requiredXp = options.requiredXp ?? "6900";
+    options.currentXp = options.currentXp ?? "3000";
+    options.showXp = options.showXp ?? true;
 
     let validatedProgress = parseFloat(options.progress);
-    if (Number.isNaN(validatedProgress) || validatedProgress < 0 || validatedProgress > 100) throw new Error("Invalid progress parameter, must be between 0 to 100");
+    if (isNaN(validatedProgress) || validatedProgress < 0 || validatedProgress > 100) {
+        throw new Error("Invalid progress parameter, must be between 0 to 100");
+    }
 
-    if (validatedProgress < 2) validatedProgress = 2;
-    if (validatedProgress > 99) validatedProgress = 99;
+    validatedProgress = Math.min(Math.max(validatedProgress, 2), 99);
 
     const validatedColor = await colorFetch(
         options.color || "ff0000",
@@ -41,15 +42,15 @@ const RankCard = async (options) => {
     if (options.level.length > 10) options.level = `${options.level.slice(0, 10)}...`;
     if (options.rank.length > 5) options.rank = "99999";
 
-    const frame = canvas.createCanvas(1280, 450);
+    const frame = createCanvas(1280, 450);
     const ctx = frame.getContext("2d");
 
-    let backgroundPath = path.join(__dirname, "../../assets/img/background.png");
-    let background = await canvas.loadImage(backgroundPath);
+    const backgroundPath = path.join(__dirname, "./assets/img/background.png");
+    const background = await loadImage(backgroundPath);
 
     ctx.drawImage(background, 0, 0, frame.width, frame.height);
 
-    const avatar = canvas.createCanvas(650, 650);
+    const avatar = createCanvas(650, 650);
     const av = avatar.getContext("2d");
     const avImg = await loadImage(options.avatar);
     const avSize = Math.min(avImg.width, avImg.height);
@@ -74,11 +75,11 @@ const RankCard = async (options) => {
     ctx.stroke();
 
     if (options.shape !== "circle") {
-        throw new Error("Status indicator can only be show if shape is a circle");
+        throw new Error("Status indicator can only be shown if shape is a circle");
     }
-    
-    let statusPath = path.join(__dirname, `../../assets/img/${options.status}.png`);
-    let status = await loadImage(statusPath);
+
+    const statusPath = path.join(__dirname, `./assets/img/${options.status}.png`);
+    const status = await loadImage(statusPath);
 
     ctx.beginPath();
     ctx.arc(297 + 70 / 2, 297 + 70 / 2, 70 / 3, 0, Math.PI * 2, true);
@@ -100,43 +101,23 @@ const RankCard = async (options) => {
     ctx.fillStyle = "#787878";
     ctx.fillText(options.level, 440, 270);
 
-    if (options.rank.length == 1) {
-        ctx.font = "bold 60px chewy";
-        ctx.fillStyle = "#787878";
-        ctx.fillText(`#${options.rank}`, 1080, 250);
-    } else if (options.rank.length == 2) {
-        ctx.font = "bold 60px chewy";
-        ctx.fillStyle = "#787878";
-        ctx.fillText(`#${options.rank}`, 1060, 250);
-    } else if (options.rank.length == 3) {
-        ctx.font = "bold 60px chewy";
-        ctx.fillStyle = "#787878";
-        ctx.fillText(`#${options.rank}`, 1050, 250);
-    } else if (options.rank.length == 4) {
-        ctx.font = "bold 55px chewy";
-        ctx.fillStyle = "#787878";
-        ctx.fillText(`#${options.rank}`, 1040, 250);
-    } else if (options.rank.length == 5) {
-        ctx.font = "bold 50px chewy";
-        ctx.fillStyle = "#787878";
-        ctx.fillText(`#${options.rank}`, 1035, 250);
-    }
+    const rankFontSize = options.rank.length <= 2 ? 60 :
+                         options.rank.length === 3 ? 55 :
+                         options.rank.length === 4 ? 50 : 45;
 
-    const abbreviateNumber = (value) => {
+    ctx.font = `bold ${rankFontSize}px chewy`;
+    ctx.fillStyle = "#787878";
+    ctx.fillText(`#${options.rank}`, 1035 + (5 - options.rank.length) * 10, 250);
+
+    const abbreviateNumber = (value: number): string => {
         const suffixes = ["", "K", "M", "B", "T", "Tr"];
         let suffixNum = 0;
         while (value >= 1000) {
             suffixNum++;
             value /= 1000;
         }
-        let shortValue = value;
-        if (shortValue % 1 !== 0) {
-            shortValue = shortValue.toFixed(1);
-        }
-        if (suffixNum > 0) {
-            shortValue += suffixes[suffixNum];
-        }
-        return shortValue;
+        const shortValue = value % 1 !== 0 ? value.toFixed(1) : value.toString();
+        return shortValue + suffixes[suffixNum];
     };
 
     if (options.showXp) {
@@ -146,7 +127,7 @@ const RankCard = async (options) => {
 
         ctx.font = "thin 55px chewy";
         ctx.fillStyle = "#787878";
-        ctx.fillText(`${abbreviateNumber(`${options.currentXp}`)} / ${abbreviateNumber(`${options.requiredXp}`)}`, 580, 350);
+        ctx.fillText(`${abbreviateNumber(Number(options.currentXp))} / ${abbreviateNumber(Number(options.requiredXp))}`, 580, 350);
     }
 
     ctx.beginPath();
@@ -156,8 +137,7 @@ const RankCard = async (options) => {
     ctx.strokeStyle = "#242323";
     ctx.stroke();
 
-    const progress = validatedProgress;
-    const angle = (progress / 100) * Math.PI * 2;
+    const angle = (validatedProgress / 100) * Math.PI * 2;
 
     ctx.beginPath();
     ctx.arc(1115, 235, 100, -Math.PI / 2, -Math.PI / 2 + angle, false);
@@ -168,4 +148,4 @@ const RankCard = async (options) => {
     return frame.toBuffer("image/png");
 };
 
-module.exports = { RankCard };
+export { RankCard };
